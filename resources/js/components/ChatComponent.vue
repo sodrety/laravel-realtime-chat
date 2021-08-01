@@ -82,7 +82,7 @@
         },
         methods: {
             fetchMessages() {
-                axios.get('messages').then(response => {
+                axios.get('api/messages').then(response => {
                     this.messages = response.data;
                 })
             },
@@ -91,7 +91,7 @@
                     user: this.user,
                     message: this.newMessage
                 });
-                axios.post('messages', {message: this.newMessage});
+                axios.post('api/messages', {message: this.newMessage});
                 this.newMessage = '';
             },
             sendTypingEvent() {

@@ -1912,8 +1912,7 @@ __webpack_require__.r(__webpack_exports__);
         return u.id != user.id;
       });
     }).listen('ChatEvent', function (event) {
-      console.log(event.chat);
-      debugger;
+      console.log(event);
 
       _this.messages.push(event.chat);
     }).listenForWhisper('typing', function (user) {
@@ -1932,7 +1931,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchMessages: function fetchMessages() {
       var _this2 = this;
 
-      axios.get('messages').then(function (response) {
+      axios.get('api/messages').then(function (response) {
         _this2.messages = response.data;
       });
     },
@@ -1941,7 +1940,7 @@ __webpack_require__.r(__webpack_exports__);
         user: this.user,
         message: this.newMessage
       });
-      axios.post('messages', {
+      axios.post('api/messages', {
         message: this.newMessage
       });
       this.newMessage = '';

@@ -14,6 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
+Route::post('register', [App\Http\Controllers\UserController::class, 'register']);
+
+
+Route::group(['middleware' => 'auth:api'], function(){
+
+	Route::post('details', [App\Http\Controllers\UserController::class, 'details']);
+    Route::get('messages', [App\Http\Controllers\ChatController::class, 'fetchAllMessages'])->name('messages');
+    Route::post('messages', [App\Http\Controllers\ChatController::class, 'sendMessage'])->name('messages');
+
 });

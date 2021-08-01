@@ -17,10 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('login', function(){
+    return view('auth/login');
+})->name('login');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
+Route::post('logout', [App\Http\Controllers\UserController::class, 'logout'])->name('logout');
+Route::post('register', [App\Http\Controllers\UserController::class, 'register']);
 
-Route::get('/chats', [App\Http\Controllers\ChatController::class, 'index']);
-Route::get('/messages', [App\Http\Controllers\ChatController::class, 'fetchAllMessages'])->name('messages');
-Route::post('/messages', [App\Http\Controllers\ChatController::class, 'sendMessage'])->name('messages');
+// Auth::routes();
+
+Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('chats', [App\Http\Controllers\ChatController::class, 'index'])->middleware('auth:api');
