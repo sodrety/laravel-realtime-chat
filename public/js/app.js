@@ -1931,7 +1931,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchMessages: function fetchMessages() {
       var _this2 = this;
 
-      axios.get('api/messages').then(function (response) {
+      axios.get('messages').then(function (response) {
         _this2.messages = response.data;
       });
     },
@@ -1940,7 +1940,7 @@ __webpack_require__.r(__webpack_exports__);
         user: this.user,
         message: this.newMessage
       });
-      axios.post('api/messages', {
+      axios.post('messages', {
         message: this.newMessage
       });
       this.newMessage = '';
